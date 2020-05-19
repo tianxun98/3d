@@ -1,9 +1,11 @@
+import {createItems} from "./menu"
+import {initPalette} from './main-palette'
 let palette,tabView,borderPane;
 export function init(){
     palette = new ht.widget.Palette();
-    initPalette();
-    tabView = new ht.widget.TabView();
+    initPalette(palette);
 
+    tabView = new ht.widget.TabView();
     borderPane = new ht.widget.BorderPane();
     toolbar = new ht.widget.Toolbar([]);
 
@@ -15,69 +17,7 @@ export function init(){
     createTabView('默认图纸', 'scenes/机房3.json');
 }
 
-function initPalette() {// 加载palette面板组件中的图元
-    var arrNode = ['basic', 'displayDevice', 'cabinetRelative', 'deskChair', 'temperature', 'indoors', 'monitor','others'];
-    var nameArr = ['基础图元', '展示设施', '机柜相关', '桌椅储物', '温度控制', '室内', '视频监控', '其他'];// arrNode中的index与nameArr中的一一对应
-    let maps = new Map([
-        [0,['models/basic/墙面.png', 'models/basic/折角墙面.png']],
-        [1,['models/机房/展示设施/台式电脑.png', 'models/机房/展示设施/大屏.png']],
-        [2,['models/机房/机柜相关/配电箱.png', 'models/机房/机柜相关/室外天线.png', 'models/机房/机柜相关/机柜1.png', 'models/机房/机柜相关/机柜2.png', 'models/机房/机柜相关/机柜3.png', 'models/机房/机柜相关/机柜4.png', 'models/机房/机柜相关/电池柜.png']],
-        [3,['models/机房/桌椅储物/储物柜.png', 'models/机房/桌椅储物/桌子.png', 'models/机房/桌椅储物/椅子.png']],
-        [4,['models/机房/温度控制/空调精简.png', 'models/机房/消防设施/消防设备.png', 'models/机械/空调外机立式.png']],
-        [5,['models/室内/办公桌简易.png', 'models/室内/书.png', 'models/室内/办公桌镜像.png', 'models/室内/办公椅.png']],
-        [6,['models/机房/视频监控/摄像头方.png', 'models/机房/视频监控/对讲维护摄像头.png', 'models/机房/视频监控/微型摄像头.png']],
-        [7,['models/其他/信号塔.png']],
-    ]);
-    for (var i = 0; i < arrNode.length; i++) {
-        var name = nameArr[i];
-        var vName = arrNode[i];
 
-        arrNode[i] = new ht.Group();// palette面板是将图元都分在“组”里面，然后向“组”中添加图元即可
-        palette.dm().add(arrNode[i]);// 向palette面板组件中添加group图元
-        arrNode[i].setExpanded(true);// 设置分组为打开的状态
-        arrNode[i].setName(name);// 设置组的名字
-
-        // var imageArr = [];
-        // switch(i){
-        //     case 0:
-        //         imageArr = ['models/basic/墙面.png', 'models/basic/折角墙面.png'];
-        //         break;
-        //     case 1:
-        //         imageArr = ['models/机房/展示设施/台式电脑.png', 'models/机房/展示设施/大屏.png'];
-        //         break;
-        //     case 2:
-        //         imageArr = ['models/机房/机柜相关/配电箱.png', 'models/机房/机柜相关/室外天线.png', 'models/机房/机柜相关/机柜1.png', 'models/机房/机柜相关/机柜2.png', 'models/机房/机柜相关/机柜3.png', 'models/机房/机柜相关/机柜4.png', 'models/机房/机柜相关/电池柜.png'];
-        //         break;
-        //     case 3:
-        //         imageArr = ['models/机房/桌椅储物/储物柜.png', 'models/机房/桌椅储物/桌子.png', 'models/机房/桌椅储物/椅子.png'];
-        //         break;
-        //     case 4:
-        //         imageArr = ['models/机房/温度控制/空调精简.png', 'models/机房/消防设施/消防设备.png', 'models/机械/空调外机立式.png'];
-        //         break;
-        //     case 5:
-        //         imageArr = ['models/室内/办公桌简易.png', 'models/室内/书.png', 'models/室内/办公桌镜像.png', 'models/室内/办公椅.png'];
-        //         break;
-        //     case 6:
-        //         imageArr = ['models/机房/视频监控/摄像头方.png', 'models/机房/视频监控/对讲维护摄像头.png', 'models/机房/视频监控/微型摄像头.png'];
-        //         break;
-        //     default:
-        //         imageArr = ['models/其他/信号塔.png'];
-        //         break;
-        // }
-        setPalNode(maps.get(i), arrNode[i]);
-    }
-}
-
-function setPalNode(imageArr, arr) {// 创建palette上节点及设置名称、显示图片、父子关系
-    for (var j = 0; j < imageArr.length; j++) {
-        var imageName = imageArr[j];
-        var jsonUrl = imageName.slice(0, imageName.lastIndexOf('.')) + '.json';// shape3d中的 json 路径
-        var name = imageName.slice(imageName.lastIndexOf('/')+1, imageName.lastIndexOf('.')); // 取最后一个/和.之间的字符串用来设置节点名称
-        var url = imageName.slice(imageName.indexOf('/')+1, imageName.lastIndexOf('.'));// 取第一个/和最后一个.之间的字符串用来设置拖拽生成模型obj文件的路径
-
-        createNode(name, imageName, arr, url, jsonUrl);// 创建节点，这个节点是显示在palette面板上
-    }
-}
 
 function dragAndDrop(g3d) {// 拖拽功能
     if (ht.Default.isTouchable) {// 判断是否为触屏可Touch方式交互
@@ -147,21 +87,7 @@ function createBasicModel(g3d, e, name, points) {// 创建palette面板“其他
     return node;
 }
 
-function createNode(name, image, parent, urlName, jsonUrl) {// 创建palette面板组件上的节点
-    var node = new ht.Node();
-    palette.dm().add(node);
-    node.setName(name);
-    node.setImage(image);
-    node.setParent(parent);
-    node.s({
-        'draggable': true,
-        'image.stretch': 'centerUniform',
-        'label': ''
-    });
-    node.a('urlName', urlName);
-    node.a('jsonUrl', jsonUrl);
-    return node;
-}
+
 
 function loadObjFunc(objUrl, mtlUrl, jsonUrl, g3d, p3, image) {// 加载 obj 文件 模型
     var node = new ht.Node();
@@ -196,115 +122,6 @@ function loadObjFunc(objUrl, mtlUrl, jsonUrl, g3d, p3, image) {// 加载 obj 文
             }
         }
     });
-}
-
-function createItems(g3d, newTab) {
-    var menu = new ht.widget.Menu();// 创建菜单组件
-    var json = [
-        {
-            label: '新建',
-            items: [
-                {
-                    label: '新建图纸',
-                    action: function() {
-                        createTabView();// 新建页签
-                    }
-                }
-            ]
-        }
-    ];
-    menu.setItems(json); // 设置菜单组件内容
-    menu.enableGlobalKey();
-
-    var items = [
-        {
-            element: menu
-        },
-        "separator",
-        {
-            label: '场景 JSON',
-            action: function() {
-                if (dialog) return;
-
-                var dialog = createDialog('场景 JSON');
-                var content = dialog.getConfig().content;
-                content.innerHTML = newTab.getView().dm().serialize();
-                content.disabled = true;
-                var btns = dialog.getConfig().buttons;
-                btns.push({
-                    label: '编辑',
-                    action: function() {
-                        content.disabled = false;
-
-                        btns[1].disabled = false;
-                        btns[0].label = '取消';
-                        btns[0].action = function() {
-                            dialog.hide();
-                        }
-                        dialog.setConfig(dialog.getConfig());
-                    }
-                });
-                btns.push({
-                    label: '提交',
-                    disabled: true,
-                    action: function() {
-                        var str = dialog.getConfig().content.value;
-                        if (typeof str === 'string') {
-                            try {
-                                if (g3d.sm().ld()) var node = g3d.sm().ld();
-
-                                g3d.dm().clear();
-                                g3d.dm().deserialize(dialog.getConfig().content.value, '', true);// 反序列化数据容器
-                                g3d.json = g3d.dm().serialize();// 将这个导入的数据容器序列化 重置json内容
-
-                                if (node) g3d.sm().ss(g3d.dm().getDataById(node.getId()));
-
-                                dialog.hide();
-                            }catch(e) {
-                                console.log(e);
-                                return;
-                            }
-                        }
-                    }
-                });
-                dialog.setConfig(dialog.getConfig());
-            }
-        },
-        {
-            label: '清空场景',
-            action: function() {
-                g3d.dm().clear();
-            }
-        },
-        {
-            label: '导入 JSON',
-            action: function() {
-                if (dialog) return;
-
-                var dialog = createDialog('导入 JSON');
-                var btns = dialog.getConfig().buttons;
-                btns.push({
-                    label: '保存',
-                    action: function(btn, event) {
-                        var str = dialog.getConfig().content.value;
-                        if (typeof str === 'string') {
-                            try {
-                                g3d.dm().deserialize(dialog.getConfig().content.value);//反序列化数据容器
-                                g3d.json = g3d.dm().serialize();//将这个导入的数据容器序列化 重置json内容
-                                dialog.hide();
-                            }catch(e) {
-                                console.log(e);
-                                dialog.hide();
-                                return;
-                            }
-                        }
-                    }
-                });
-                dialog.setConfig(dialog.getConfig());
-            }
-        }
-    ];
-    return items;
 }
 
 function setCenter(g3d, center, finish) {
@@ -359,8 +176,9 @@ function createTabView(name, sceneJson) {// 创建页签组件
     else createTab('新建图纸', g3d);
 
     tabView.onTabChanged = function(oldTab, newTab) {
+        console.log(newTab)
         toolbar.setItems([]);
-        toolbar.setItems(createItems(g3d, newTab));
+        toolbar.setItems(createItems(g3d, newTab,createTabView));
 
         if (oldTab) oldTab.getView().form.getView().style.display = 'none';
         if (newTab.getView().sm().ld()) newTab.getView().form.getView().style.display = 'block';
@@ -433,25 +251,11 @@ function create3DView() {// 创建 3d 场景 场景上有“JSON”按钮
     return g3d;
 }
 
-function createDialog(title) {
-    var dialog = new ht.widget.Dialog();
-    dialog.setConfig({
-        title: title,
-        content: document.createElement('textarea'),
-        width: 360,
-        height: 400,
-        closable: true,
-        buttons: []
-    });
-    dialog.show();
-    return dialog;
-}
-
 function createForm(g3d) { //创建属性面板
     var form = new ht.widget.FormPane();
     form.getView().style.top = '53px';
     form.getView().style.right = '5px';
-    form.getView().style.background = 'rgba(255, 255, 255, 0.3)';
+    form.getView().style.background = 'rgba(255, 255, 255, 0.5)';
     form.getView().style.display = 'none';
     form.getView().style.borderRadius = '5px';
     form.setLabelColor('rgb(138, 138, 138)');
@@ -558,7 +362,6 @@ function createForm(g3d) { //创建属性面板
 function formValue(g3d, form) {
     var node = g3d.sm().ld();
     if (!node) return;
-
     form.v('Id', node.getId()+'');
     form.v('Name', node.getName());
 

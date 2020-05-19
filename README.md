@@ -1,4 +1,4 @@
-# ht-3d
+# vue
 
 ## Project setup
 ```
@@ -15,5 +15,7 @@ npm run serve
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Lints and fixes files
+```
+npm run lint
+```
