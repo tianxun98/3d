@@ -10,7 +10,12 @@
         name: 'Home',
         components: {},
         mounted() {
-            init()
+            init();
         }
     }
 </script>
+<style>
+    .menu-item{
+        padding: 10px !important;
+    }
+</style>

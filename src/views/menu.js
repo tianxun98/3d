@@ -12,9 +12,15 @@ export function createItems(g3d, newTab,createTabView) {
                     action: function() {
                         createTabView();// 新建页签
                     }
+                },
+                {
+                    label: '新建2',
+                    action: function() {
+                        createTabView();// 新建页签
+                    }
                 }
             ]
-        }
+        },
     ];
     menu.setItems(json); // 设置菜单组件内容
     menu.enableGlobalKey();
