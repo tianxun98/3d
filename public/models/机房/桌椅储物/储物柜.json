@@ -1,0 +1,7 @@
+{
+  "modelType": "obj",
+  "obj": "../../public/assets/objs/机房/桌椅储物/储物柜.obj",
+  "mtl": "../../public/assets/objs/机房/桌椅储物/储物柜.mtl",
+  "image": "symbols/机房/储物柜.json",
+  "hx.associateObject": "机房环境"
+}

@@ -1,0 +1,7 @@
+{
+  "modelType": "obj",
+  "obj": "../../public/assets/objs/机房/桌椅储物/椅子.obj",
+  "mtl": "../../public/assets/objs/机房/桌椅储物/椅子.mtl",
+  "image": "symbols/机房/椅子.json",
+  "hx.associateObject": "机房环境"
+}

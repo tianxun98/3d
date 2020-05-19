@@ -1,0 +1,8 @@
+{
+  "modelType": "obj",
+  "obj": "../../public/assets/objs/机房/桌椅储物/桌子.obj",
+  "mtl": "../../public/assets/objs/机房/桌椅储物/桌子.mtl",
+  "image": "symbols/机房/桌子.json",
+  "alarms": [],
+  "hx.associateObject": "机房环境"
+}

@@ -1,0 +1,482 @@
+{
+  "v": "6.2.0",
+  "p": {
+    "autoAdjustIndex": true,
+    "hierarchicalRendering": false
+  },
+  "d": [
+    {
+      "c": "ht.Shape",
+      "i": 38,
+      "p": {
+        "name": "折角墙面",
+        "position": {
+          "x": 10.34414,
+          "y": 22.4251
+        },
+        "anchorElevation": 0,
+        "width": 1185.50618,
+        "height": 1145.38665,
+        "tall": 272.82003,
+        "points": {
+          "__a": [
+            {
+              "x": -582.40895,
+              "y": -550.26822,
+              "e": 60
+            },
+            {
+              "x": 603.09723,
+              "y": -550.26822,
+              "e": 60
+            },
+            {
+              "x": 603.09723,
+              "y": 595.11843,
+              "e": 60
+            }
+          ]
+        },
+        "thickness": 8
+      },
+      "s": {
+        "all.color": "rgba(186,224,255,0.4)",
+        "shape.background": null,
+        "shape.border.width": 14,
+        "shape.border.color": "#DDDDDD",
+        "all.transparent": true,
+        "all.reverse.flip": true,
+        "label": "",
+        "3d.editable": false,
+        "3d.movable": false
+      }
+    },
+    {
+      "c": "ht.Shape",
+      "i": 39,
+      "p": {
+        "name": "折角墙面",
+        "rotation": 3.13294,
+        "position": {
+          "x": -182.29159,
+          "y": 20.14361
+        },
+        "anchorElevation": 0,
+        "width": 791.03056,
+        "height": 1144.92894,
+        "tall": 272.1009,
+        "points": {
+          "__a": [
+            {
+              "x": -577.80687,
+              "y": -552.32086,
+              "e": 60
+            },
+            {
+              "x": 213.2237,
+              "y": -552.32086,
+              "e": 60
+            },
+            {
+              "x": 213.2237,
+              "y": 592.60807,
+              "e": 60
+            }
+          ]
+        },
+        "thickness": 8
+      },
+      "s": {
+        "all.color": "rgba(186,224,255,0.4)",
+        "shape.background": null,
+        "shape.border.width": 14,
+        "shape.border.color": "#DDDDDD",
+        "all.transparent": true,
+        "all.reverse.flip": true,
+        "label": "",
+        "3d.movable": false,
+        "3d.editable": false
+      }
+    },
+    {
+      "c": "ht.Shape",
+      "i": 40,
+      "p": {
+        "name": "墙面",
+        "position": {
+          "x": 464.10874,
+          "y": 590.38752
+        },
+
+        "anchorElevation": 0,
+        "width": 268.39035,
+        "height": 1,
+        "tall": 277.11477,
+        "elevation": -4.65021,
+        "points": {
+          "__a": [
+            {
+              "x": 329.91356,
+              "y": 590.38752,
+              "e": 60
+            },
+            {
+              "x": 598.30392,
+              "y": 590.38752,
+              "e": 60
+            }
+          ]
+        },
+        "thickness": 8
+      },
+      "s": {
+        "all.color": "rgba(186,224,255,0.4)",
+        "shape.background": null,
+        "shape.border.width": 14,
+        "shape.border.color": "#DDDDDD",
+        "all.transparent": true,
+        "all.reverse.flip": true,
+        "label": "",
+        "3d.movable": false,
+        "3d.editable": false
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 241,
+      "p": {
+        "name": "块5516",
+        "tag": 1560322446197,
+        "image": {
+          "width": 150,
+          "height": 150,
+          "comps": [
+            {
+              "type": "rect",
+              "borderWidth": 0,
+              "borderColor": "#34495E",
+              "background": "#E74C3C",
+              "depth": 5
+            }
+          ]
+        },
+        "position": {
+          "x": -7.77255,
+          "y": 1.00507
+        },
+        "width": 1920,
+        "height": 1080
+      },
+      "s": {
+        "mItemName": "mBlock",
+        "parentBlock": true,
+        "p": {
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "width": 50,
+          "height": 50
+        },
+        "shape": "rect",
+        "shape.background": "rgb(10,3,2)",
+        "shape.border.width": 1,
+        "shape.border.color": "#34495E",
+        "draggable": true,
+        "label": "",
+        "layout.vg": "scale",
+        "layout.hg": "scale",
+        "width": 1920,
+        "height": 1080,
+        "2d.selectable": false,
+        "2d.movable": false
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 41,
+      "p": {
+        "name": "机柜2",
+        "rotation": -1.55599,
+        "position": {
+          "x": -498.57903,
+          "y": 485.1374
+        },
+        "width": 90,
+        "height": 90,
+        "tall": 240.0001,
+        "elevation": 120.00005
+      },
+      "s": {
+        "shape3d": "models/机房/机柜相关/机柜2.json",
+        "label": ""
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 42,
+      "p": {
+        "name": "机柜3",
+        "rotation": -1.57117,
+        "position": {
+          "x": -496.46259,
+          "y": 392.69987
+        },
+        "width": 90,
+        "height": 90,
+        "tall": 240,
+        "elevation": 120
+      },
+      "s": {
+        "shape3d": "models/机房/机柜相关/机柜3.json",
+        "label": ""
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 43,
+      "p": {
+        "name": "机柜3",
+        "rotation": -1.57441,
+        "position": {
+          "x": -496.09842,
+          "y": 301.33261
+        },
+        "width": 90,
+        "height": 90,
+        "tall": 240,
+        "elevation": 120
+      },
+      "s": {
+        "shape3d": "models/机房/机柜相关/机柜3.json",
+        "label": ""
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 44,
+      "p": {
+        "name": "机柜4",
+        "rotation": -1.56844,
+        "position": {
+          "x": -496.72843,
+          "y": 208.6571
+        },
+        "width": 90,
+        "height": 90,
+        "tall": 136.2395,
+        "elevation": 68.11975
+      },
+      "s": {
+        "shape3d": "models/机房/机柜相关/机柜4.json",
+        "label": ""
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 45,
+      "p": {
+        "name": "空调精简",
+        "rotation": -0.67805,
+        "position": {
+          "x": -513.47778,
+          "y": -483.23782
+        },
+        "width": 98.0938,
+        "height": 91.4565,
+        "tall": 281.0608,
+        "elevation": 141.89675
+      },
+      "s": {
+        "shape3d": "models/机房/温度控制/空调精简.json",
+        "label": ""
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 46,
+      "p": {
+        "name": "空调外机立式",
+        "position": {
+          "x": -624.92129,
+          "y": -455.70667
+        },
+        "width": 60.388,
+        "height": 120.836,
+        "tall": 200,
+        "elevation": 100
+      },
+      "s": {
+        "shape3d": "models/机械/空调外机立式.json",
+        "label": ""
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 47,
+      "p": {
+        "name": "储物柜",
+        "rotation": 1.56219,
+        "position": {
+          "x": 549.67707,
+          "y": 293.02231
+        },
+        "width": 95.38,
+        "height": 76.87,
+        "tall": 226.52,
+        "elevation": 113.26
+      },
+      "s": {
+        "shape3d": "models/机房/桌椅储物/储物柜.json",
+        "label": ""
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 48,
+      "p": {
+        "name": "消防设备",
+        "rotation": 1.53919,
+        "position": {
+          "x": 557.20155,
+          "y": 503.88649
+        },
+        "width": 79.93,
+        "height": 66.48,
+        "tall": 108.06,
+        "elevation": 54.03
+      },
+      "s": {
+        "shape3d": "models/机房/消防设施/消防设备.json",
+        "label": ""
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 49,
+      "p": {
+        "name": "办公椅",
+        "rotation": -1.96923,
+        "position": {
+          "x": 277.1836,
+          "y": -112.28469
+        },
+        "width": 78.375,
+        "height": 66.4804,
+        "tall": 116.7173,
+        "elevation": 58.35865
+      },
+      "s": {
+        "shape3d": "models/室内/办公椅.json",
+        "label": ""
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 50,
+      "p": {
+        "name": "办公桌镜像",
+        "rotation": 1.53595,
+        "position": {
+          "x": 280.19122,
+          "y": -144.76535
+        },
+        "width": 208.875,
+        "height": 267.7149,
+        "tall": 84.5284,
+        "elevation": 42.2642
+      },
+      "s": {
+        "shape3d": "models/室内/办公桌镜像.json",
+        "label": ""
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 51,
+      "p": {
+        "name": "书",
+        "rotation": -0.02475,
+        "rotationX": -1.4306,
+        "position": {
+          "x": 337.71945,
+          "y": -193.58283
+        },
+        "width": 47.625,
+        "height": 7.8828,
+        "tall": 39.4285,
+        "elevation": 91.36976
+      },
+      "s": {
+        "shape3d": "models/室内/书.json",
+        "label": "",
+        "3d.movable": false
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 52,
+      "p": {
+        "name": "台式电脑",
+        "rotation": -0.63405,
+        "position": {
+          "x": 229.15103,
+          "y": -193.26819
+        },
+        "width": 50.78125,
+        "height": 44.34399,
+        "tall": 42.9514,
+        "elevation": 111.1782
+      },
+      "s": {
+        "shape3d": "models/机房/展示设施/台式电脑.json",
+        "label": "",
+        "3d.movable": false
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 53,
+      "p": {
+        "name": "大屏",
+        "rotation": -3.11883,
+        "position": {
+          "x": 293.08484,
+          "y": -519.63896
+        },
+        "width": 216.2422,
+        "height": 5.9451,
+        "tall": 121.6144,
+        "elevation": 166.12032
+      },
+      "s": {
+        "shape3d": "models/机房/展示设施/大屏.json",
+        "label": "",
+        "3d.movable": false
+      }
+    },
+    {
+      "c": "ht.Node",
+      "i": 54,
+      "p": {
+        "name": "摄像头方",
+        "rotation": 0.59009,
+        "rotationX": 0.11508,
+        "rotationZ": 0.03831,
+        "position": {
+          "x": 567.39909,
+          "y": -488.50382
+        },
+        "width": 31.74,
+        "height": 73.74,
+        "tall": 39.37,
+        "elevation": 272.28475
+      },
+      "s": {
+        "shape3d": "models/机房/视频监控/摄像头方.json",
+        "label": "",
+        "3d.movable": false
+      }
+    }
+  ]
+}
