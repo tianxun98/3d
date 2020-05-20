@@ -62,7 +62,7 @@ function handleDrop(e, g3d) {// 鼠标放开时
             }]);
         }
         else {
-            loadObjFunc('../../public/assets/objs/' + paletteNode.a('urlName') + '.obj', '../../public/assets/objs/' + paletteNode.a('urlName') + '.mtl', paletteNode.a('jsonUrl'), g3d, g3d.getHitPosition(e), paletteNode.getImage());// 设置图片名称与obj名称有路径相关性代码会比较少
+            loadObjFunc('assets/objs/' + paletteNode.a('urlName') + '.obj', 'assets/objs/' + paletteNode.a('urlName') + '.mtl',paletteNode.a('jsonUrl'), g3d, g3d.getHitPosition(e), paletteNode.getImage());// 设置图片名称与obj名称有路径相关性代码会比较少
         }
         g3d.setFocus();// 将焦点设置在键盘事件上
     }
@@ -85,33 +85,32 @@ function createBasicModel(g3d, e, name, points) {// 创建palette面板“其他
     node.setTall(120);
     node.setAnchorElevation(0);
     g3d.dm().add(node);
-    g3d.sm().ss(node);
+    g3d.sm().ss(node);//ss = setSelection
     node.p3(g3d.getHitPosition(e));
     return node;
 }
 
 function loadObjFunc(objUrl, mtlUrl, jsonUrl, g3d, p3, image) {// 加载 obj 文件 模型
-    var node = new ht.Node();
+    let node = new ht.Node();
     node.setImage(image);
-    var shape3d = jsonUrl.slice(jsonUrl.lastIndexOf('/') + 1, jsonUrl.lastIndexOf('.'));
-
+    let shape3d = jsonUrl.slice(jsonUrl.lastIndexOf('/') + 1, jsonUrl.lastIndexOf('.'));
     ht.Default.loadObj(objUrl, mtlUrl, {
         cube: true,
         center: true,
-        shape3d: shape3d,
+        shape3d: shape3d,//string
         finishFunc: function (modelMap, array, rawS3) {
+            //rawS3包含所有模型的原始尺寸
             if (modelMap) {
                 node.s({
                     'shape3d': jsonUrl,
                     'label': ''
                 });
                 g3d.dm().add(node);
-
                 if (shape3d === '空调外机立式') node.s3(rawS3[0] / 10, rawS3[1] / 10, rawS3[2] / 10);
                 else if (shape3d === '台式电脑') node.s3(rawS3[0] / 4, rawS3[1] / 4, rawS3[2] / 4);
-                else node.s3(rawS3);
+                else node.s3(rawS3); //s3 = setSize3d | getSize3d
 
-                node.p3(p3);
+                node.p3(p3);//p3 = setPosition3d | getPosition3d;
                 node.setName(shape3d);
                 node.setElevation(node.s3()[1] / 2);// 属性栏中需要获取节点的坐标 若设置 setAnchorElevation 则 y 轴坐标永远为 0
                 // node.setAnchorElevation(0);
@@ -185,7 +184,6 @@ function createTabView(name, sceneJson) {// 创建页签组件
         if (oldTab) oldTab.getView().form.getView().style.display = 'none';
         if (newTab.getView().sm().ld()) newTab.getView().form.getView().style.display = 'block';
     };
-
     if (sceneJson) {
         g3d.setEye(-3, 536, 1405);
         ht.Default.xhrLoad(sceneJson, function (text) {

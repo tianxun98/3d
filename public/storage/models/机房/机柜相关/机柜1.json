@@ -1,0 +1,7 @@
+{
+  "modelType": "obj",
+  "obj": "assets/objs/机房/机柜相关/机柜1.obj",
+  "mtl": "assets/objs/机房/机柜相关/机柜1.mtl",
+  "image": "symbols/机房/机柜空机架.json",
+  "hx.associateObjectId": "911"
+}
