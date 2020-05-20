@@ -73,7 +73,7 @@
                 }, {"x": 400, "y": 700}]);
             }
             else {
-                this.loadObjFunc('../../public/assets/objs/' + paletteNode.a('urlName') + '.obj', '../../public/assets/objs/' + paletteNode.a('urlName') + '.mtl', paletteNode.a('jsonUrl'), g3d, g3d.getHitPosition(e), paletteNode.getImage());// 设置图片名称与obj名称有路径相关性代码会比较少
+                this.loadObjFunc('assets/objs/' + paletteNode.a('urlName') + '.obj', 'assets/objs/' + paletteNode.a('urlName') + '.mtl', paletteNode.a('jsonUrl'), g3d, g3d.getHitPosition(e), paletteNode.getImage());// 设置图片名称与obj名称有路径相关性代码会比较少
             }
             g3d.setFocus();// 将焦点设置在键盘事件上
         }

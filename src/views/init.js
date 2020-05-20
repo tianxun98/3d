@@ -1,7 +1,9 @@
 import {createItems} from "./menu"
 import {initPalette} from './main-palette'
-let palette,tabView,borderPane;
-export function init(){
+
+let palette, tabView, borderPane;
+
+export function init() {
     palette = new ht.widget.Palette();
     initPalette(palette);
 
@@ -17,11 +19,9 @@ export function init(){
     createTabView('默认图纸', 'scenes/机房3.json');
 }
 
-
-
 function dragAndDrop(g3d) {// 拖拽功能
     if (ht.Default.isTouchable) {// 判断是否为触屏可Touch方式交互
-        palette.handleDragAndDrop = function(e, state) {
+        palette.handleDragAndDrop = function (e, state) {
             if (ht.Default.containedInView(e, g3d)) {// 判断交互事件所处位置是否在View组件之上
                 if (state === 'between') {
                     handleOver(e);
@@ -33,11 +33,11 @@ function dragAndDrop(g3d) {// 拖拽功能
         }
     }
     else {
-        g3d.getView().addEventListener("dragover", function(e) {
+        g3d.getView().addEventListener("dragover", function (e) {
             e.dataTransfer.dropEffect = "copy";
             handleOver(e);
         });
-        g3d.getView().addEventListener("drop", function(e) {
+        g3d.getView().addEventListener("drop", function (e) {
             handleDrop(e, g3d);
         });
     }
@@ -53,13 +53,16 @@ function handleDrop(e, g3d) {// 鼠标放开时
     var paletteNode = palette.dm().sm().ld();
     if (paletteNode) {
         if (paletteNode.getName() === '墙面') {
-            createBasicModel(g3d, e, paletteNode.getName(), [{"x": -700,"y": -700},{"x": 400,"y": -700}]);
+            createBasicModel(g3d, e, paletteNode.getName(), [{"x": -700, "y": -700}, {"x": 400, "y": -700}]);
         }
         else if (paletteNode.getName() === '折角墙面') {
-            createBasicModel(g3d, e, paletteNode.getName(), [ {"x": -700,"y": -300},{"x": 400,"y": -300},{"x": 400,"y": 700}]);
+            createBasicModel(g3d, e, paletteNode.getName(), [{"x": -700, "y": -300}, {"x": 400, "y": -300}, {
+                "x": 400,
+                "y": 700
+            }]);
         }
         else {
-            loadObjFunc('../../public/assets/objs/' + paletteNode.a('urlName') + '.obj', '../../public/assets/objs/' + paletteNode.a('urlName') + '.mtl', paletteNode.a('jsonUrl'), g3d, g3d.getHitPosition(e), paletteNode.getImage());// 设置图片名称与obj名称有路径相关性代码会比较少
+            loadObjFunc('assets/objs/' + paletteNode.a('urlName') + '.obj', 'assets/objs/' + paletteNode.a('urlName') + '.mtl',paletteNode.a('jsonUrl'), g3d, g3d.getHitPosition(e), paletteNode.getImage());// 设置图片名称与obj名称有路径相关性代码会比较少
         }
         g3d.setFocus();// 将焦点设置在键盘事件上
     }
@@ -82,37 +85,34 @@ function createBasicModel(g3d, e, name, points) {// 创建palette面板“其他
     node.setTall(120);
     node.setAnchorElevation(0);
     g3d.dm().add(node);
-    g3d.sm().ss(node);
+    g3d.sm().ss(node);//ss = setSelection
     node.p3(g3d.getHitPosition(e));
     return node;
 }
 
-
-
 function loadObjFunc(objUrl, mtlUrl, jsonUrl, g3d, p3, image) {// 加载 obj 文件 模型
-    var node = new ht.Node();
+    let node = new ht.Node();
     node.setImage(image);
-    var shape3d = jsonUrl.slice(jsonUrl.lastIndexOf('/')+1, jsonUrl.lastIndexOf('.'));
-
+    let shape3d = jsonUrl.slice(jsonUrl.lastIndexOf('/') + 1, jsonUrl.lastIndexOf('.'));
     ht.Default.loadObj(objUrl, mtlUrl, {
         cube: true,
         center: true,
-        shape3d: shape3d,
-        finishFunc: function(modelMap, array, rawS3) {
+        shape3d: shape3d,//string
+        finishFunc: function (modelMap, array, rawS3) {
+            //rawS3包含所有模型的原始尺寸
             if (modelMap) {
                 node.s({
                     'shape3d': jsonUrl,
                     'label': ''
                 });
                 g3d.dm().add(node);
+                if (shape3d === '空调外机立式') node.s3(rawS3[0] / 10, rawS3[1] / 10, rawS3[2] / 10);
+                else if (shape3d === '台式电脑') node.s3(rawS3[0] / 4, rawS3[1] / 4, rawS3[2] / 4);
+                else node.s3(rawS3); //s3 = setSize3d | getSize3d
 
-                if (shape3d === '空调外机立式') node.s3(rawS3[0]/10, rawS3[1]/10, rawS3[2]/10);
-                else if (shape3d === '台式电脑') node.s3(rawS3[0]/4, rawS3[1]/4, rawS3[2]/4);
-                else node.s3(rawS3);
-
-                node.p3(p3);
+                node.p3(p3);//p3 = setPosition3d | getPosition3d;
                 node.setName(shape3d);
-                node.setElevation(node.s3()[1]/2);// 属性栏中需要获取节点的坐标 若设置 setAnchorElevation 则 y 轴坐标永远为 0
+                node.setElevation(node.s3()[1] / 2);// 属性栏中需要获取节点的坐标 若设置 setAnchorElevation 则 y 轴坐标永远为 0
                 // node.setAnchorElevation(0);
                 g3d.sm().ss(node);
                 formValue(g3d, g3d.form);
@@ -134,8 +134,9 @@ function setCenter(g3d, center, finish) {
 
     ht.Default.startAnim({
         duration: 500,
-        finishFunc: finish||function(){},
-        action: function(v, t) {
+        finishFunc: finish || function () {
+        },
+        action: function (v, t) {
             g3d.setCenter([
                 c[0] + dx * v,
                 c[1] + dy * v,
@@ -155,8 +156,9 @@ function setEye(g3d, eye, finish) {
 
     ht.Default.startAnim({
         duration: 500,
-        finishFunc: finish||function(){},
-        action: function(v, t) {
+        finishFunc: finish || function () {
+        },
+        action: function (v, t) {
             g3d.setEye([
                 e[0] + dx * v,//从当前camera位置根据v的速度移动到目标camera位置 e[0] + dx = eye[0]
                 e[1] + dy * v,
@@ -175,18 +177,16 @@ function createTabView(name, sceneJson) {// 创建页签组件
     if (name && name !== '') createTab(name, g3d);
     else createTab('新建图纸', g3d);
 
-    tabView.onTabChanged = function(oldTab, newTab) {
-        console.log(newTab)
+    tabView.onTabChanged = function (oldTab, newTab) {
         toolbar.setItems([]);
-        toolbar.setItems(createItems(g3d, newTab,createTabView));
+        toolbar.setItems(createItems(g3d, newTab, createTabView));
 
         if (oldTab) oldTab.getView().form.getView().style.display = 'none';
         if (newTab.getView().sm().ld()) newTab.getView().form.getView().style.display = 'block';
     };
-
     if (sceneJson) {
         g3d.setEye(-3, 536, 1405);
-        ht.Default.xhrLoad(sceneJson, function(text) {
+        ht.Default.xhrLoad(sceneJson, function (text) {
             let json = ht.Default.parse(text);
             g3d.dm().deserialize(json);
         });
@@ -214,18 +214,18 @@ function create3DView() {// 创建 3d 场景 场景上有“JSON”按钮
     g3d.setEditable(true);
     g3d.json = '';
 
-    g3d.dm().md(function(e) {// 属性变化时改变 json 内容
+    g3d.dm().md(function (e) {// 属性变化时改变 json 内容
         g3d.json = g3d.dm().serialize();
     });
 
-    g3d.mi(function(e) {// 鼠标事件处理
+    g3d.mi(function (e) {// 鼠标事件处理
         if (e.kind === 'doubleClickData') {// 双击视线缓缓移向图元
             var p3 = e.data.p3();
             var r3 = e.data.r3();
 
             if (g3d.flyTo) g3d.flyTo(e.data, true);// 6.2.2 版本以上才有此方法
             else {
-                setEye(g3d, [p3[0]*(Math.PI/2 - Math.abs(r3[1])), 2.3*p3[1], 0.3*p3[2]]);
+                setEye(g3d, [p3[0] * (Math.PI / 2 - Math.abs(r3[1])), 2.3 * p3[1], 0.3 * p3[2]]);
                 setCenter(g3d, p3);
             }
         }
@@ -237,7 +237,7 @@ function create3DView() {// 创建 3d 场景 场景上有“JSON”按钮
         }
     });
 
-    g3d.sm().ms(function(e) {//选择模型变化时才触发的操作
+    g3d.sm().ms(function (e) {//选择模型变化时才触发的操作
         if (e.kind === 'set') {//代表此事件由setSelection(datas)引发
             formValue(g3d, g3d.form);
             g3d.form.getView().style.display = 'block';
@@ -263,7 +263,7 @@ function createForm(g3d) { //创建属性面板
     form.setHeight(270);
     document.body.appendChild(form.getView());
 
-    form.addRow([{ element: '属性:', font: 'bold 12px arial, sans-serif' }], [0.1]);
+    form.addRow([{element: '属性:', font: 'bold 12px arial, sans-serif'}], [0.1]);
     form.addRow([
         'Id:',
         {
@@ -283,15 +283,15 @@ function createForm(g3d) { //创建属性面板
         {property1: 'movable', value1: '可移动', property2: 'selectable', value2: '可选中'}
     ];
     //添加是否可编辑。是否可移动，是否可见
-    array.forEach(function(d) {
+    array.forEach(function (d) {
         form.addRow([
             d.value1,
             {
                 id: d.property1,
                 checkBox: {
                     selected: true,
-                    onValueChanged: function(){
-                        if (g3d.sm().ld()) g3d.sm().ld().s('3d.'+d.property1, this.getValue());
+                    onValueChanged: function () {
+                        if (g3d.sm().ld()) g3d.sm().ld().s('3d.' + d.property1, this.getValue());
                     }
                 }
             },
@@ -300,8 +300,8 @@ function createForm(g3d) { //创建属性面板
                 id: d.property2,
                 checkBox: {
                     selected: true,
-                    onValueChanged: function(){
-                        if (g3d.sm().ld()) g3d.sm().ld().s('3d.'+d.property2, this.getValue());
+                    onValueChanged: function () {
+                        if (g3d.sm().ld()) g3d.sm().ld().s('3d.' + d.property2, this.getValue());
                     }
                 }
             }
@@ -315,28 +315,28 @@ function createForm(g3d) { //创建属性面板
         {property: 'Position3d', value: '坐标'},
         {property: 'Rotation3d', value: '旋转'}
     ];
-    array.forEach(function(p, index) {
+    array.forEach(function (p, index) {
         form.addRow([
             p.value,
             'X:',
             {
-                id: p.property+'.x',
+                id: p.property + '.x',
                 textField: {}
             },
             'Y:',
             {
-                id: p.property+'.y',
+                id: p.property + '.y',
                 textField: {}
             },
             'Z:',
             {
-                id: p.property+'.z',
+                id: p.property + '.z',
                 textField: {}
             },
         ], [0.2, 0.1, 0.2, 0.1, 0.2, 0.1, 0.2]);
     });
 
-    form.getView().addEventListener('keyup', function(e) {
+    form.getView().addEventListener('keyup', function (e) {
         if (e.keyCode === 9) {
             var node = g3d.sm().ld();
             if (!node) return;
@@ -347,9 +347,9 @@ function createForm(g3d) { //创建属性面板
             node.r3([parseFloat(form.v('Rotation3d.x')), parseFloat(form.v('Rotation3d.y')), parseFloat(form.v('Rotation3d.z'))]);
         }
     });
-    document.body.addEventListener('mousedown', function(e) {
+    document.body.addEventListener('mousedown', function (e) {
         var node = g3d.sm().ld();
-        if(!node) return;
+        if (!node) return;
 
         node.setName(form.v('Name'));
         node.s3([parseInt(form.v('Size.x')), parseInt(form.v('Size.y')), parseInt(form.v('Size.z'))]);
@@ -362,7 +362,7 @@ function createForm(g3d) { //创建属性面板
 function formValue(g3d, form) {
     var node = g3d.sm().ld();
     if (!node) return;
-    form.v('Id', node.getId()+'');
+    form.v('Id', node.getId() + '');
     form.v('Name', node.getName());
 
     form.v('Size.x', (node.s3()[0].toFixed(0)));

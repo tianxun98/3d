@@ -19,7 +19,10 @@
                 menuHoverLabelColor: '#000',
 
                 tabViewSelectBackground: '#45C4F9',
-                tabViewSelectWidth: 24
+                tabViewSelectWidth: 24,
+                convertURL: function(url){
+                    return 'storage/' + url;
+                }
             }
         }
     </script>
