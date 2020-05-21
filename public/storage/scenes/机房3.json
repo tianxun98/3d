@@ -189,7 +189,8 @@
         "width": 1920,
         "height": 1080,
         "2d.selectable": false,
-        "2d.movable": false
+        "2d.movable": false,
+        "3d.movable": false
       }
     },
     {
