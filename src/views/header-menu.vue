@@ -1,6 +1,6 @@
 <template>
     <div class="header-menu" ref="menu">
-        <el-dialog :title="title" :visible.sync="dialogVisible" @close="close" width="70%">
+        <el-dialog :title="edgeType" :visible.sync="dialogVisible" @close="close" width="70%">
             <main>
                 <div v-if="edgeType === '修改场景'">
                     <el-input v-model="getJson" type="textarea" :autosize="{ minRows: 2, maxRows: 10}">
@@ -8,7 +8,7 @@
                 </div>
                 <div v-if="edgeType === '导入JSON'">
                     <el-upload
-                            ref="upload" action
+                            ref="import" action
                             :accept="uploadAccept"
                             name="files"
                             :limit="1"
@@ -20,6 +20,31 @@
                                 size="small"
                                 type="success"
                                 @click="submitUpload"
+                        >上传到服务器
+                        </el-button>
+                    </el-upload>
+                </div>
+                <div v-if="edgeType === '添加图元'">
+                    <el-select v-model="$store.state.addPalette.getValue" style="margin:0 10px 10px 0"
+                               placeholder="选择组里面添加图元" size="small">
+                        <el-option  v-for="item in options"
+                                    :key="item.value"
+                                    :label="item.label"
+                                    :value="item.value"></el-option>
+                    </el-select>
+                    <el-upload
+                            ref="addPixel" action
+                            :accept="uploadPixel"
+                            name="files"
+                            multiple
+                            :auto-upload="false"
+                    >
+                        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+                        <el-button
+                                style="margin-left: 10px;"
+                                size="small"
+                                type="success"
+                                @click="addPixel"
                         >上传到服务器
                         </el-button>
                     </el-upload>
@@ -46,15 +71,25 @@
         },
         data() {
             return {
+                options:[
+                    {label:'基础图元',value:0},
+                    {label:'展示设施',value:1},
+                    {label:'机柜相关',value:2},
+                    {label:'桌椅储物',value:3},
+                    {label:'温度控制',value:4},
+                    {label:'室内',value:5},
+                    {label:'视频监控',value:6},
+                    {label:'其他',value:7},
+                ],
                 htObj:{
                     g3d:'',
                     newTab:''
                 },
-                title: '场景JSON',
                 dialogVisible: false,
                 getJson: '',
                 edgeType: '场景',
-                uploadAccept:'.json'
+                uploadAccept:'.json',
+                uploadPixel:'.json,.obj,.mtl,.png'
             }
         },
         methods: {
@@ -113,7 +148,6 @@
                                 label: '导入JSON',
                                 action:  ()=> {
                                     this.edgeType = '导入JSON';
-                                    this.title = '导入JSON';
                                     this.dialogVisible = true;
                                 }
                             },
@@ -128,7 +162,13 @@
                         element: menu
                     },
                     "separator",
-
+                    {
+                        label: '添加图元',
+                        action: () => {
+                            this.edgeType = '添加图元';
+                            this.dialogVisible = true;
+                        }
+                    },
                     {
                         label: '保存项目',
                         action: () => {
@@ -141,13 +181,14 @@
             confirm() {
                 let fn = new Map([
                     ['修改场景', this.freshenJson],
-                    ['导入JSON',this.submitUpload]
+                    ['导入JSON',this.submitUpload],
+                    ['添加图元',this.addPixel],
                 ]);
                 return fn.get(this.edgeType)()
             },
             submitUpload(){
                 let formData = new FormData();
-                let fileList = this.$refs.upload.uploadFiles[0];
+                let fileList = this.$refs['import'].uploadFiles[0];
                 formData.append("file", fileList.raw);
                 this.$http.post('attachment', formData, "/upload").then(res => {
                     if (res.code === 200 && res.data.attachmentList.length > 0) {
@@ -162,7 +203,27 @@
                         // }
                     }
                 })
+            },
+            addPixel(){
+                let fileList = this.$refs['addPixel'].uploadFiles;
+                let formData = new FormData();
+                if (fileList.length > 0) {
+                    fileList.forEach(file => {
+                        formData.append("files", file.raw);
+                    });
+                }
+                let addClass = this.$store.state.addPalette.getValue;
+                formData.append("addClass", addClass);
+                this.$http.post('upload', formData,'/' + addClass).then(res => {
+                    if (res.code === 200 ) {
+                        this.$store.state.isChange = true;
+                        this.$message.success(res.message);
+                        setTimeout(()=>{
+                            this.close();
+                        },500);
 
+                    }
+                })
             },
             freshenJson(){
                 if (typeof this.getJson === 'string') {
@@ -195,8 +256,4 @@
 </script>
 
 <style scoped>
-    .set-el-dialog {
-        height: 300px;
-        overflow-y: auto;
-    }
 </style>

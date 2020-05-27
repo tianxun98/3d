@@ -22,9 +22,6 @@ const toLogin = () => {
 axios.defaults.timeout = 10000;
 axios.defaults.headers.withCredentials = true;
 axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
-// axios.defaults.headers.common = {
-//   "Accept-Language": getLang(),
-// };
 //请求拦截器
 axios.interceptors.request.use(
   config => {

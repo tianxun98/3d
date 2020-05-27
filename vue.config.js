@@ -1,7 +1,7 @@
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i
 module.exports = {
-    publicPath: '/ht_3d',
+    publicPath: '/web_3d',
     lintOnSave: false,
     chainWebpack: config => {
         config.module
@@ -35,7 +35,8 @@ module.exports = {
         port: 9900,
         proxy: {
             '/api': {
-                target: "http://10.18.2.199:4000/api/dc",
+                // target: "http://10.17.162.100:5000/api/dc",
+                target: "http://10.17.162.100:5000/miot",
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': '' // 重写路径

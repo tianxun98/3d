@@ -5,14 +5,9 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/index',
-        name: 'index',
-        component: () => import('../old-file/index.vue')
-    },
-    {
         path: '/',
         name: 'home',
-        component: () => import('../views/home.vue')
+        component: () => import('../views/index.vue')
     },
 ]
 
