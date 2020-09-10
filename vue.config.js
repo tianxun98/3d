@@ -33,10 +33,12 @@ module.exports = {
     devServer: {
         open: true,
         port: 9900,
+        disableHostCheck: true,
+        // host:'http://developer.meicloud.com',
         proxy: {
             '/api': {
-                // target: "http://10.17.162.100:5000/api/dc",
-                target: "http://10.17.162.100:5000/miot",
+                target: "http://scada.meicloud.com:8080/miot",
+                // target: "http://10.17.162.100:21003/miot",
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': '' // 重写路径

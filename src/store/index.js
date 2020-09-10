@@ -5,11 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-      addPalette:{
-          getValue:0,
-      },
       isChange:false,
-      auth:{}
+      auth:{},
+      getProjectInfo:{},
   },
   mutations: {
   },

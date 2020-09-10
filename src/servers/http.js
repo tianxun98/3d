@@ -17,13 +17,13 @@ const toLogin = () => {
     }
   });
 };
-
+let instance = axios.create();
 //请求超时时间
-axios.defaults.timeout = 10000;
-axios.defaults.headers.withCredentials = true;
-axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
+instance.defaults.timeout = 10000;
+instance.defaults.headers.withCredentials = true;
+instance.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
 //请求拦截器
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   config => {
     loadingOpt = Loading.service({
       lock: true,
@@ -41,50 +41,54 @@ axios.interceptors.request.use(
   }
 );
 // 响应拦截器
-axios.interceptors.response.use(
+instance.interceptors.response.use(
   response => {
-    if (response.data.code === 200) {
-      loadingOpt.close();
-      // Message.success(response.data.message);
-      return response.data;
-    } else {
-      loadingOpt.close();
-      Message.error(response.data.message);
-      return Promise.reject(response.data);
+    try{
+        if (response.data.code === 200) {
+            loadingOpt.close();
+            // Message.success(response.data.message);
+            return response.data;
+        } else {
+            loadingOpt.close();
+            Message.error(response.data.message);
+            return Promise.reject(response.data);
+        }
+    }catch (e) {
+        loadingOpt.close();
     }
+
   },
   error => {
-    if (error.response.status) {
-      loadingOpt.close();
-      switch (error.response.status) {
-        case 401:
-          toLogin();
-          break;
-        case 403:
-          Message.error('当前无权限，返回登录');
-          // setTimeout(()=>{
-          //     router.replace({
-          //         path: '/',
-          //         query: {redirect: router.currentRoute.fullPath}
-          //     });
-          // },1000);
-          break;
-        case 404:
-          Message.error('请求参数或者地址错误');
-          break;
-        case 500:
-          Message.error(
-            error.response.data.message
-          );
-          break;
-        default:
-          Message.error('服务错误');
-          break;
-      }
-    } else {
-      loadingOpt.close();
-      return Promise.reject(error.response);
+    try{
+        if (error.response.status) {
+            loadingOpt.close();
+            switch (error.response.status) {
+                case 401:
+                    toLogin();
+                    break;
+                case 403:
+                    Message.error('当前无权限，返回登录');
+                    break;
+                case 404:
+                    Message.error('请求参数或者地址错误');
+                    break;
+                case 500:
+                    Message.error(
+                        error.response.data.message
+                    );
+                    break;
+                default:
+                    Message.error('服务错误');
+                    break;
+            }
+        } else {
+            loadingOpt.close();
+            return Promise.reject(error.response);
+        }
+    }catch (e) {
+        loadingOpt.close();
     }
+
   }
 );
-export default axios;
+export default instance;

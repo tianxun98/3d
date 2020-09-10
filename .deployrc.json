@@ -1,0 +1,4 @@
+{
+  "deployRoot": "/apps/www/front/web_3d",
+  "buildCmd": "npm run sit:build"
+}

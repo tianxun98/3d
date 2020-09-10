@@ -1,0 +1,91 @@
+h3,p{
+  margin: 0;
+  padding: 0;
+}
+ul{
+  padding: 0;
+  margin: 0;
+}
+ul li{
+  list-style: none;
+}
+.flex{
+  display: flex;
+  .left-main{
+    flex-basis: 250px;
+    width: 250px;
+  }
+  .right-main{
+    flex: 1;
+  }
+}
+
+.tag-length{
+  display: inline-block;
+  width: 280px !important;
+  padding-right: 20px;
+  margin-right: 10px;
+  position: relative;
+}
+.custom-input{
+  width: 250px !important;
+  margin:0 10px;
+}
+.overflow-hidden{
+  overflow: hidden;
+}
+.h-100{
+  height: 100%;
+}
+.text-center{
+  text-align: center;
+  position: relative;
+}
+.default-input {
+  border: 1px solid rgb(217, 217, 217);
+  outline: 0px;
+  padding: 0px 2px;
+  position: absolute;
+  margin: 0px;
+  box-sizing: border-box;
+  font: 12px arial, sans-serif;
+  left: 0px;
+  top: 0px;
+  width: 157px;
+  height: 20px;
+}
+
+#history {
+  display: none;
+}
+.searchClass{
+  width: 100%;
+  .el-input--small .el-input__inner{
+    border: none !important;
+  }
+}
+.history-layout {
+  position: absolute;
+  z-index: 10;
+  bottom: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  color: rgb(138, 138, 138);
+  width: 250px;
+  height: 150px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+    text-align: center;
+    margin: 0;
+    padding: 5px 0;
+    cursor: pointer;
+  }
+  li.active {
+    background: #ccc;
+    color: #fff;
+  }
+}

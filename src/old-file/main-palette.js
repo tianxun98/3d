@@ -9,7 +9,7 @@ export function initPalette(palette) {// 加载palette面板组件中的图元
         [2,['models/机房/机柜相关/配电箱.png', 'models/机房/机柜相关/室外天线.png', 'models/机房/机柜相关/机柜1.png', 'models/机房/机柜相关/机柜2.png', 'models/机房/机柜相关/机柜3.png', 'models/机房/机柜相关/机柜4.png', 'models/机房/机柜相关/电池柜.png']],
         [3,['models/机房/桌椅储物/储物柜.png', 'models/机房/桌椅储物/桌子.png', 'models/机房/桌椅储物/椅子.png']],
         [4,['models/机房/温度控制/空调精简.png', 'models/机房/消防设施/消防设备.png', 'models/机械/空调外机立式.png']],
-        [5,['models/室内/办公桌简易.png', 'models/室内/书.png', 'models/室内/办公桌镜像.png', 'models/室内/办公椅.png']],
+        [5,['models/室内/办公桌简易.png', 'models/室内/书.png', 'models/室内/大型办公桌.png', 'models/室内/办公椅.png']],
         [6,['models/机房/视频监控/摄像头方.png', 'models/机房/视频监控/对讲维护摄像头.png', 'models/机房/视频监控/微型摄像头.png']],
         [7,['models/其他/信号塔.png']],
     ]);

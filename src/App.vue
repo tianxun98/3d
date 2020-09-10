@@ -26,6 +26,8 @@
   }
 </script>
 <style lang="less">
+  @import "assets/reset-element";
+  @import "assets/base";
 html {
   height: 100%;
   font-size: 12px;
@@ -35,7 +37,7 @@ body {
   padding: 0;
   height: 100%;
   margin: 0;
-  overflow: hidden;
+  background: #fff;
 }
 ::-webkit-scrollbar-track-piece {
   width: 5px;

@@ -11,7 +11,7 @@
             Default: {
                 paletteItemHoverBorderColor: '#eee',//鼠标悬浮时palette中节点的边框颜色
                 paletteItemSelectBackground: 'rgb(221, 221, 221)',//选中的palette中节点的背景颜色
-
+                paletteTitleLabelColor:'#000',
                 menuSeparatorWidth: 0,//菜单栏底部分割线的宽度
                 menuLabelFont: '12px arial, Helvetica Neue',
                 menuBackground: '#ECF0F1',
@@ -19,6 +19,7 @@
                 menuHoverLabelColor: '#000',
                 tabViewSelectBackground: '#45C4F9',
                 tabViewSelectWidth: 24,
+                tabViewTabBackground:'#999',
                 convertURL: function(url){
                     let index=url.indexOf("http");
                     if(index<0) {
@@ -26,6 +27,12 @@
                     }
                     return url;
                 }
+            },
+            Color:{
+                highlight: '#4183C4',
+                headerBackground: '#FAFAFA',
+                titleBackground: '#F4F4F4',
+                toolTipBackground: '#FAFAFA',
             }
         };
     </script>
@@ -36,14 +43,16 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script src="lib/core/EEIKC7YFMhhu.js"></script>
+    <script src="lib/core/o2nc2znOSCvF.js"></script>
     <script src="lib/core/ht.js"></script>
+    <script src="lib/core/buckle.js"></script>
     <script src="lib/plugin/ht-obj.js"></script><!--obj模型-->
     <script src="lib/plugin/ht-cssanimation.js"></script><!--css动画，对话框基于这个-->
     <script src="lib/plugin/ht-form.js"></script><!--表单，对话框基于这个-->
-    <!--<script src="lib/plugin/ht-dialog.js"></script>&lt;!&ndash;对话框&ndash;&gt;-->
     <script src="lib/plugin/ht-palette.js"></script><!--面板组件-->
     <script src="lib/plugin/ht-contextmenu.js"></script><!--右键菜单，菜单基于这个-->
-    <script src="lib/plugin/ht-menu.js"></script><!--菜单-->
-    <script src="lib/plugin/ht-live.js"></script><!--交互式图元-->
+    <script src="lib/plugin/ht-animation.js"></script>
+    <script src="lib/plugin/ht-flow.js"></script>
   </body>
 </html>

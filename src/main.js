@@ -8,6 +8,9 @@ import http from "./servers/servers";
 import "element-ui/lib/theme-chalk/index.css";
 Vue.config.productionTip = false;
 Vue.prototype.$http = http;
+import VueCodeMirror from 'vue-codemirror'
+import 'codemirror/lib/codemirror.css'
+Vue.use(VueCodeMirror)
 Vue.use(ElementUI);
 new Vue({
   router,
